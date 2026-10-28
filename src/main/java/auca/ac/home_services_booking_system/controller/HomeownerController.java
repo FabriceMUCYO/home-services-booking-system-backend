@@ -103,4 +103,22 @@ public class HomeownerController {
 
         return homeownerService.getHomeownersByLastName(lastName);
     }
+
+    @GetMapping("/of-technician/{technicianId}")
+    public ResponseEntity<?> getHomeownersByTechnicianId(
+            @PathVariable UUID technicianId) {
+
+        if (!homeownerService.technicianExists(technicianId)) {
+
+            return new ResponseEntity<>(
+                "The technician with that id does not exist",
+                HttpStatus.NOT_FOUND
+            );
+        }
+
+        List<Homeowner> homeowners =
+                homeownerService.getHomeownersByTechnicianId(technicianId);
+
+        return new ResponseEntity<>(homeowners, HttpStatus.OK);
+    }
 }

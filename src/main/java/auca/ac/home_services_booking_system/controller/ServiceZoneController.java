@@ -82,4 +82,10 @@ public class ServiceZoneController {
             return new ResponseEntity<>(message, HttpStatus.OK);
         }
     }
+
+    @GetMapping("/free")
+    public List<ServiceZone> getFreeServiceZones() {
+
+        return serviceZoneService.getFreeServiceZones();
+    }
 }

@@ -86,4 +86,10 @@ public class TechnicianController {
 
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
+
+    @GetMapping("/by-trade")
+    public List<Technician> getTechniciansByTrade(@RequestParam String name) {
+
+        return technicianService.getTechniciansByTrade(name);
+    }
 }

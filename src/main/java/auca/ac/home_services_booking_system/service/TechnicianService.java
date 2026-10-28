@@ -142,4 +142,9 @@ public class TechnicianService {
 
         return "Technician deleted successfully";
     }
+
+    public List<Technician> getTechniciansByTrade(String name) {
+
+        return technicianRepository.findTechniciansByTrade(name);
+    }
 }

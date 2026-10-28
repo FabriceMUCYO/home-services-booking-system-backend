@@ -69,4 +69,9 @@ public class ServiceZoneService {
             return "The service zone with that id does not exist";
         }
     }
+
+    public List<ServiceZone> getFreeServiceZones() {
+
+        return serviceZoneRepository.findFreeServiceZones();
+    }
 }

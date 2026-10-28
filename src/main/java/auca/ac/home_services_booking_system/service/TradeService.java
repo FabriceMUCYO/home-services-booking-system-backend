@@ -68,4 +68,9 @@ public class TradeService {
             return "The trade with that id does not exist";
         }
     }
+
+    public List<Trade> getUnusedTrades() {
+
+        return tradeRepository.findUnusedTrades();
+    }
 }

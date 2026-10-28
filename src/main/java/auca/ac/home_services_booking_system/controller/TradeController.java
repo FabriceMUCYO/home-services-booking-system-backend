@@ -82,4 +82,10 @@ public class TradeController {
             return new ResponseEntity<>(message, HttpStatus.OK);
         }
     }
+
+    @GetMapping("/unused")
+    public List<Trade> getUnusedTrades() {
+
+        return tradeService.getUnusedTrades();
+    }
 }

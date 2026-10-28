@@ -9,12 +9,16 @@ import org.springframework.stereotype.Service;
 
 import auca.ac.home_services_booking_system.model.Homeowner;
 import auca.ac.home_services_booking_system.repository.HomeownerRepository;
+import auca.ac.home_services_booking_system.repository.TechnicianRepository;
 
 @Service
 public class HomeownerService {
 
     @Autowired
     private HomeownerRepository homeownerRepository;
+
+    @Autowired
+    private TechnicianRepository technicianRepository;
 
     public String saveHomeowner(Homeowner homeowner) {
 
@@ -78,5 +82,15 @@ public class HomeownerService {
     public List<Homeowner> getHomeownersByLastName(String lastName) {
 
         return homeownerRepository.findByLastNameIgnoreCaseOrderByFirstNameAsc(lastName);
+    }
+
+    public boolean technicianExists(UUID technicianId) {
+
+        return technicianRepository.existsById(technicianId);
+    }
+
+    public List<Homeowner> getHomeownersByTechnicianId(UUID technicianId) {
+
+        return homeownerRepository.findHomeownersByTechnicianId(technicianId);
     }
 }
