@@ -19,7 +19,6 @@ public class HomeownerService {
     public String saveHomeowner(Homeowner homeowner) {
 
         if (homeownerRepository.existsByPhone(homeowner.getPhone())) {
-
             return "A homeowner with that phone number already exists";
         }
 
@@ -43,7 +42,6 @@ public class HomeownerService {
         Optional<Homeowner> existingHomeowner = homeownerRepository.findById(id);
 
         if (existingHomeowner.isEmpty()) {
-
             return "The homeowner with that id does not exist";
         }
 
@@ -51,7 +49,6 @@ public class HomeownerService {
 
         if (!updatedHomeowner.getPhone().equals(homeowner.getPhone())
                 && homeownerRepository.existsByPhone(homeowner.getPhone())) {
-
             return "A homeowner with that phone number already exists";
         }
 
@@ -70,12 +67,16 @@ public class HomeownerService {
         Optional<Homeowner> existingHomeowner = homeownerRepository.findById(id);
 
         if (existingHomeowner.isEmpty()) {
-
             return "The homeowner with that id does not exist";
         }
 
         homeownerRepository.deleteById(id);
 
         return "Homeowner deleted successfully";
+    }
+
+    public List<Homeowner> getHomeownersByLastName(String lastName) {
+
+        return homeownerRepository.findByLastNameIgnoreCaseOrderByFirstNameAsc(lastName);
     }
 }

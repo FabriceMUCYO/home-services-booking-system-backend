@@ -1,5 +1,6 @@
 package auca.ac.home_services_booking_system.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import auca.ac.home_services_booking_system.model.Homeowner;
 import auca.ac.home_services_booking_system.model.JobBooking;
+import auca.ac.home_services_booking_system.model.JobStatus;
 import auca.ac.home_services_booking_system.model.Technician;
 import auca.ac.home_services_booking_system.repository.HomeownerRepository;
 import auca.ac.home_services_booking_system.repository.JobBookingRepository;
@@ -140,5 +142,15 @@ public class JobBookingService {
         jobBookingRepository.deleteById(id);
 
         return "Job booking deleted successfully";
+    }
+
+    public List<JobBooking> getJobBookingsByStatus(JobStatus status) {
+
+        return jobBookingRepository.findByStatusOrderByBookingDateAsc(status);
+    }
+
+    public List<JobBooking> getJobBookingsBetweenDates(LocalDate start, LocalDate end) {
+
+        return jobBookingRepository.findByBookingDateBetweenOrderByBookingDateAsc(start, end);
     }
 }

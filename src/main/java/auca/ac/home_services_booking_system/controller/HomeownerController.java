@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import auca.ac.home_services_booking_system.model.Homeowner;
@@ -95,5 +96,11 @@ public class HomeownerController {
         }
 
         return new ResponseEntity<>(message, HttpStatus.OK);
+    }
+
+    @GetMapping("/by-last-name")
+    public List<Homeowner> getHomeownersByLastName(@RequestParam String lastName) {
+
+        return homeownerService.getHomeownersByLastName(lastName);
     }
 }
