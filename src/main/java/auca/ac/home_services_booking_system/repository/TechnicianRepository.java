@@ -14,4 +14,5 @@ public interface TechnicianRepository extends JpaRepository<Technician, UUID> {
     @Query("SELECT DISTINCT t FROM Technician t JOIN t.trades tr WHERE LOWER(tr.name) = LOWER(:name)")
     List<Technician> findTechniciansByTrade(@Param("name") String name);
 
+    boolean existsByServiceZoneIdAndIdNot(UUID serviceZoneId,UUID technicianId);
 }

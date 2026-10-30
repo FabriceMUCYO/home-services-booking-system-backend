@@ -70,27 +70,19 @@ public class HomeownerService {
 
         Optional<Homeowner> existingHomeowner = homeownerRepository.findById(id);
 
-        if (existingHomeowner.isEmpty()) {
+        if (existingHomeowner.isEmpty()){
             return "The homeowner with that id does not exist";
         }
-
         homeownerRepository.deleteById(id);
-
         return "Homeowner deleted successfully";
     }
-
-    public List<Homeowner> getHomeownersByLastName(String lastName) {
-
+    public List<Homeowner> getHomeownersByLastName(String lastName){
         return homeownerRepository.findByLastNameIgnoreCaseOrderByFirstNameAsc(lastName);
     }
-
-    public boolean technicianExists(UUID technicianId) {
-
+    public boolean technicianExists(UUID technicianId){
         return technicianRepository.existsById(technicianId);
     }
-
-    public List<Homeowner> getHomeownersByTechnicianId(UUID technicianId) {
-
+    public List<Homeowner> getHomeownersByTechnicianId(UUID technicianId){
         return homeownerRepository.findHomeownersByTechnicianId(technicianId);
     }
 }

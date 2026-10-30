@@ -1,14 +1,11 @@
 package auca.ac.home_services_booking_system.controller;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import auca.ac.home_services_booking_system.model.ServiceZone;
 import auca.ac.home_services_booking_system.service.ServiceZoneService;
 
@@ -28,22 +25,18 @@ public class ServiceZoneController {
     }
 
     @GetMapping("/all")
-    public List<ServiceZone> getAllServiceZones() {
-
+    public List<ServiceZone> getAllServiceZones(){
         return serviceZoneService.getAllServiceZones();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getServiceZoneById(@PathVariable UUID id) {
 
-        Optional<ServiceZone> serviceZone = serviceZoneService.getServiceZoneById(id);
+        Optional<ServiceZone> serviceZone=serviceZoneService.getServiceZoneById(id);
 
-        if (serviceZone.isPresent()) {
-
-            return new ResponseEntity<>(serviceZone.get(), HttpStatus.OK);
-
-        } else {
-
+        if (serviceZone.isPresent()){
+            return new ResponseEntity<>(serviceZone.get(),HttpStatus.OK);
+        } else{
             return new ResponseEntity<>(
                 "The service zone with that id does not exist",
                 HttpStatus.NOT_FOUND
@@ -58,12 +51,9 @@ public class ServiceZoneController {
 
         String message = serviceZoneService.updateServiceZone(id, serviceZone);
 
-        if (message.equals("The service zone with that id does not exist")) {
-
+        if (message.equals("The service zone with that id does not exist")){
             return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
-
-        } else {
-
+        }else{
             return new ResponseEntity<>(message, HttpStatus.OK);
         }
     }
@@ -73,12 +63,9 @@ public class ServiceZoneController {
 
         String message = serviceZoneService.deleteServiceZone(id);
 
-        if (message.equals("The service zone with that id does not exist")) {
-
+        if (message.equals("The service zone with that id does not exist")){
             return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
-
-        } else {
-
+        } else{
             return new ResponseEntity<>(message, HttpStatus.OK);
         }
     }

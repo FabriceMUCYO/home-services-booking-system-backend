@@ -3,7 +3,6 @@ package auca.ac.home_services_booking_system.controller;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import auca.ac.home_services_booking_system.model.Homeowner;
 import auca.ac.home_services_booking_system.service.HomeownerService;
 
@@ -32,8 +30,7 @@ public class HomeownerController {
 
         String message = homeownerService.saveHomeowner(homeowner);
 
-        if (message.equals("A homeowner with that phone number already exists")) {
-
+        if (message.equals("A homeowner with that phone number already exists")){
             return new ResponseEntity<>(message, HttpStatus.CONFLICT);
         }
 
@@ -41,23 +38,18 @@ public class HomeownerController {
     }
 
     @GetMapping("/all")
-    public List<Homeowner> getAllHomeowners() {
-
+    public List<Homeowner> getAllHomeowners(){
         return homeownerService.getAllHomeowners();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getHomeownerById(@PathVariable UUID id) {
-
+    public ResponseEntity<?> getHomeownerById(@PathVariable UUID id){
         Optional<Homeowner> homeowner = homeownerService.getHomeownerById(id);
 
         if (homeowner.isPresent()) {
-
-            return new ResponseEntity<>(homeowner.get(), HttpStatus.OK);
-
+            return new ResponseEntity<>(homeowner.get(),HttpStatus.OK);
         } else {
-
-            return new ResponseEntity<>(
+            return new ResponseEntity<> (
                 "The homeowner with that id does not exist",
                 HttpStatus.NOT_FOUND
             );
@@ -72,30 +64,22 @@ public class HomeownerController {
         String message = homeownerService.updateHomeowner(id, homeowner);
 
         if (message.equals("The homeowner with that id does not exist")) {
-
-            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
-
-        } else if (message.equals("A homeowner with that phone number already exists")) {
-
-            return new ResponseEntity<>(message, HttpStatus.CONFLICT);
-
+            return new ResponseEntity<>(message,HttpStatus.NOT_FOUND);
+        } else if (message.equals("A homeowner with that phone number already exists")){
+            return new ResponseEntity<>(message,HttpStatus.CONFLICT);
         } else {
-
-            return new ResponseEntity<>(message, HttpStatus.OK);
+            return new ResponseEntity<>(message,HttpStatus.OK);
         }
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteHomeowner(@PathVariable UUID id) {
-
+    public ResponseEntity<String> deleteHomeowner(@PathVariable UUID id){
         String message = homeownerService.deleteHomeowner(id);
 
-        if (message.equals("The homeowner with that id does not exist")) {
-
+        if (message.equals("The homeowner with that id does not exist")){
             return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
         }
-
-        return new ResponseEntity<>(message, HttpStatus.OK);
+        return new ResponseEntity<>(message,HttpStatus.OK);
     }
 
     @GetMapping("/by-last-name")
@@ -108,8 +92,7 @@ public class HomeownerController {
     public ResponseEntity<?> getHomeownersByTechnicianId(
             @PathVariable UUID technicianId) {
 
-        if (!homeownerService.technicianExists(technicianId)) {
-
+        if (!homeownerService.technicianExists(technicianId)){
             return new ResponseEntity<>(
                 "The technician with that id does not exist",
                 HttpStatus.NOT_FOUND
@@ -118,7 +101,6 @@ public class HomeownerController {
 
         List<Homeowner> homeowners =
                 homeownerService.getHomeownersByTechnicianId(technicianId);
-
         return new ResponseEntity<>(homeowners, HttpStatus.OK);
     }
 }

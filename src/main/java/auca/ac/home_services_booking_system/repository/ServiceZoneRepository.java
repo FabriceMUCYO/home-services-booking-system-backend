@@ -1,6 +1,7 @@
 package auca.ac.home_services_booking_system.repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,4 +15,6 @@ public interface ServiceZoneRepository extends JpaRepository<ServiceZone, UUID> 
            "(SELECT t FROM Technician t WHERE t.serviceZone = sz) " +
            "ORDER BY sz.zoneNumber ASC")
     List<ServiceZone> findFreeServiceZones();
+
+    Optional<ServiceZone> findByZoneNumber(int zoneNumber);
 }

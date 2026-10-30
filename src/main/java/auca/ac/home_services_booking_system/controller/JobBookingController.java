@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -30,36 +31,37 @@ public class JobBookingController {
     private JobBookingService jobBookingService;
 
     @PostMapping("/save")
-    public ResponseEntity<String> saveJobBooking(@RequestBody JobBooking jobBooking) {
+    public ResponseEntity<String> saveJobBooking(@RequestBody JobBooking jobBooking){
+        String message=jobBookingService.saveJobBooking(jobBooking);
 
-        String message = jobBookingService.saveJobBooking(jobBooking);
-
-        if (message.equals("The homeowner with that id does not exist")
-                || message.equals("The technician with that id does not exist")) {
-
-            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+        if(message.equals("Job booking date cannot be in the past")){
+            return new ResponseEntity<>(message,HttpStatus.BAD_REQUEST);
         }
-
-        return new ResponseEntity<>(message, HttpStatus.CREATED);
+        else if(message.equals("Technician is already booked on that date")){
+            return new ResponseEntity<>(message, HttpStatus.CONFLICT);
+        }
+        else if(message.equals("The homeowner with that id does not exist")
+                || message.equals("The technician with that id does not exist")){
+            return new ResponseEntity<>(message,HttpStatus.NOT_FOUND);
+        }
+        else{
+            return new ResponseEntity<>(message,HttpStatus.CREATED);
+        }
     }
 
     @GetMapping("/all")
-    public List<JobBooking> getAllJobBookings() {
-
+    public List<JobBooking> getAllJobBookings(){
         return jobBookingService.getAllJobBookings();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getJobBookingById(@PathVariable UUID id) {
-
+    public ResponseEntity<?> getJobBookingById(@PathVariable UUID id){
         Optional<JobBooking> jobBooking = jobBookingService.getJobBookingById(id);
 
-        if (jobBooking.isPresent()) {
-
-            return new ResponseEntity<>(jobBooking.get(), HttpStatus.OK);
-
-        } else {
-
+        if(jobBooking.isPresent()){
+            return new ResponseEntity<>(jobBooking.get(),HttpStatus.OK);
+        }
+        else{
             return new ResponseEntity<>(
                 "The job booking with that id does not exist",
                 HttpStatus.NOT_FOUND
@@ -70,44 +72,53 @@ public class JobBookingController {
     @PutMapping("/update/{id}")
     public ResponseEntity<String> updateJobBooking(
             @PathVariable UUID id,
-            @RequestBody JobBooking jobBooking) {
+            @RequestBody JobBooking jobBooking){
 
-        String message = jobBookingService.updateJobBooking(id, jobBooking);
+        String message=jobBookingService.updateJobBooking(id,jobBooking);
 
-        if (message.equals("The job booking with that id does not exist")
+        if(message.equals("The job booking with that id does not exist")
                 || message.equals("The homeowner with that id does not exist")
-                || message.equals("The technician with that id does not exist")) {
-
-            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+                || message.equals("The technician with that id does not exist")){
+            return new ResponseEntity<>(message,HttpStatus.NOT_FOUND);
         }
-
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteJobBooking(@PathVariable UUID id) {
+    public ResponseEntity<String> deleteJobBooking(@PathVariable UUID id){
+        String message=jobBookingService.deleteJobBooking(id);
 
-        String message = jobBookingService.deleteJobBooking(id);
-
-        if (message.equals("The job booking with that id does not exist")) {
-
-            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+        if(message.equals("The job booking with that id does not exist")){
+            return new ResponseEntity<>(message,HttpStatus.NOT_FOUND);
         }
-
-        return new ResponseEntity<>(message, HttpStatus.OK);
+        return new ResponseEntity<>(message,HttpStatus.OK);
     }
 
     @GetMapping("/by-status")
-    public List<JobBooking> getJobBookingsByStatus(@RequestParam JobStatus status) {
-
+    public List<JobBooking> getJobBookingsByStatus(@RequestParam JobStatus status){
         return jobBookingService.getJobBookingsByStatus(status);
     }
 
     @GetMapping("/between")
     public List<JobBooking> getJobBookingsBetweenDates(
-            @RequestParam LocalDate start,
-            @RequestParam LocalDate end) {
+            @RequestParam LocalDate start,@RequestParam LocalDate end){
+        return jobBookingService.getJobBookingsBetweenDates(start,end);
+    }
 
-        return jobBookingService.getJobBookingsBetweenDates(start, end);
+    @PatchMapping("/{id}/status")
+    public ResponseEntity<String> changeJobBookingStatus(
+            @PathVariable UUID id,@RequestParam JobStatus status){
+
+        String message=jobBookingService.changeJobBookingStatus(id,status);
+
+        if(message.equals("The job booking with that id does not exist")){
+            return new ResponseEntity<>(message,HttpStatus.NOT_FOUND);
+        }
+        else if(message.startsWith("Cannot change status from")){
+            return new ResponseEntity<>(message,HttpStatus.BAD_REQUEST);
+        }
+        else{
+            return new ResponseEntity<>(message,HttpStatus.OK);
+        }
     }
 }
