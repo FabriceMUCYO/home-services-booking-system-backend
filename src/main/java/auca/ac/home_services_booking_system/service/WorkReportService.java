@@ -2,12 +2,11 @@
 package auca.ac.home_services_booking_system.service;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import auca.ac.home_services_booking_system.model.JobBooking;
 import auca.ac.home_services_booking_system.model.JobStatus;
 import auca.ac.home_services_booking_system.model.WorkReport;
@@ -29,7 +28,8 @@ public class WorkReportService {
         if(jobBooking.isEmpty()){
             return "The job booking with that id does not exist";
         }
-        if(jobBooking.get().getStatus() != JobStatus.FINISHED){
+
+        if(jobBooking.get().getStatus() != JobStatus.FINISHED) {
             return "Work reports are only for FINISHED job bookings";
         }
 
@@ -37,6 +37,11 @@ public class WorkReportService {
         workReport.setJobBooking(jobBooking.get());
         workReport.setReportDate(LocalDate.now());
         workReportRepository.save(workReport);
+
         return "Work report saved successfully";
+    }
+
+    public List<WorkReport> getWorkReportsByHomeownerPhone(String phone){
+        return workReportRepository.findWorkReportsByHomeownerPhone(phone);
     }
 }
