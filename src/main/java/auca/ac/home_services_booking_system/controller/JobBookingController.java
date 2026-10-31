@@ -1,3 +1,4 @@
+
 package auca.ac.home_services_booking_system.controller;
 
 import java.time.LocalDate;
@@ -38,7 +39,7 @@ public class JobBookingController {
             return new ResponseEntity<>(message,HttpStatus.BAD_REQUEST);
         }
         else if(message.equals("Technician is already booked on that date")){
-            return new ResponseEntity<>(message, HttpStatus.CONFLICT);
+            return new ResponseEntity<>(message,HttpStatus.CONFLICT);
         }
         else if(message.equals("The homeowner with that id does not exist")
                 || message.equals("The technician with that id does not exist")){
@@ -56,7 +57,7 @@ public class JobBookingController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getJobBookingById(@PathVariable UUID id){
-        Optional<JobBooking> jobBooking = jobBookingService.getJobBookingById(id);
+        Optional<JobBooking> jobBooking=jobBookingService.getJobBookingById(id);
 
         if(jobBooking.isPresent()){
             return new ResponseEntity<>(jobBooking.get(),HttpStatus.OK);
@@ -81,7 +82,7 @@ public class JobBookingController {
                 || message.equals("The technician with that id does not exist")){
             return new ResponseEntity<>(message,HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(message, HttpStatus.OK);
+        return new ResponseEntity<>(message,HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")
@@ -91,7 +92,12 @@ public class JobBookingController {
         if(message.equals("The job booking with that id does not exist")){
             return new ResponseEntity<>(message,HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(message,HttpStatus.OK);
+        else if(message.equals("That job booking has work reports, delete them first")){
+            return new ResponseEntity<>(message,HttpStatus.CONFLICT);
+        }
+        else{
+            return new ResponseEntity<>(message,HttpStatus.OK);
+        }
     }
 
     @GetMapping("/by-status")

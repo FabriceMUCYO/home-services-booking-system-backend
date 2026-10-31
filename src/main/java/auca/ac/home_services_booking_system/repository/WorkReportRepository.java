@@ -10,4 +10,6 @@ public interface WorkReportRepository extends JpaRepository<WorkReport,UUID> {
     @Query("SELECT r FROM WorkReport r WHERE r.jobBooking.homeowner.phone = :phone ORDER BY r.reportDate DESC")
     List<WorkReport> findWorkReportsByHomeownerPhone(@Param("phone") String phone);
 
+    boolean existsByJobBookingId(UUID jobBookingId);
+
 }

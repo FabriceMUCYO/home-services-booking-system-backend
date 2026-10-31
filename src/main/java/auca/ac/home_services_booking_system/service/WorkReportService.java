@@ -22,14 +22,14 @@ public class WorkReportService {
     @Autowired
     private JobBookingRepository jobBookingRepository;
 
-    public String saveWorkReport(UUID jobBookingId,WorkReport workReport){
+    public String saveWorkReport(UUID jobBookingId, WorkReport workReport) {
         Optional<JobBooking> jobBooking = jobBookingRepository.findById(jobBookingId);
 
-        if(jobBooking.isEmpty()){
+        if (jobBooking.isEmpty()) {
             return "The job booking with that id does not exist";
         }
 
-        if(jobBooking.get().getStatus() != JobStatus.FINISHED) {
+        if (jobBooking.get().getStatus() != JobStatus.FINISHED) {
             return "Work reports are only for FINISHED job bookings";
         }
 
@@ -37,11 +37,18 @@ public class WorkReportService {
         workReport.setJobBooking(jobBooking.get());
         workReport.setReportDate(LocalDate.now());
         workReportRepository.save(workReport);
-
-        return "Work report saved successfully";
+        return "Work report saved successfully ";
     }
 
-    public List<WorkReport> getWorkReportsByHomeownerPhone(String phone){
+    public List<WorkReport> getWorkReportsByHomeownerPhone(String phone) {
         return workReportRepository.findWorkReportsByHomeownerPhone(phone);
+    }
+
+    public String deleteWorkReport(UUID id) {
+        if (!workReportRepository.existsById(id)) {
+            return "The work report with that id does not exist";
+        }
+        workReportRepository.deleteById(id);
+        return "Work report deleted successfully";
     }
 }
