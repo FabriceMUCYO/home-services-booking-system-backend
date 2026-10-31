@@ -7,6 +7,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import auca.ac.home_services_booking_system.model.Homeowner;
@@ -91,6 +93,7 @@ public class JobBookingService {
         if(existingBooking.isEmpty()){
             return "The job booking with that id does not exist";
         }
+
         if(jobBooking.getHomeowner() == null || jobBooking.getHomeowner().getId() == null){
             return "The homeowner with that id does not exist";
         }
@@ -98,9 +101,11 @@ public class JobBookingService {
         Optional<Homeowner> homeowner = homeownerRepository.findById(
             jobBooking.getHomeowner().getId()
         );
+
         if(homeowner.isEmpty()){
             return "The homeowner with that id does not exist";
         }
+
         if(jobBooking.getTechnician() == null || jobBooking.getTechnician().getId() == null){
             return "The technician with that id does not exist";
         }
@@ -176,10 +181,15 @@ public class JobBookingService {
     public List<Object[]> countJobBookingsByStatus(){
         return jobBookingRepository.countJobBookingsByStatus();
     }
+
     public String cancelJobBookingsByTechnicianAndDate(UUID technicianId,LocalDate date){
         int count = jobBookingRepository.cancelJobBookingsByTechnicianAndDate(
             technicianId,date,JobStatus.FINISHED,JobStatus.CANCELLED
         );
         return count + " job bookings cancelled";
+    }
+
+    public Page<JobBooking> getJobBookingsPage(Pageable pageable){
+        return jobBookingRepository.findAll(pageable);
     }
 }

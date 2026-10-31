@@ -7,6 +7,9 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -57,7 +60,7 @@ public class JobBookingController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getJobBookingById(@PathVariable UUID id){
-        Optional<JobBooking> jobBooking=jobBookingService.getJobBookingById(id);
+        Optional<JobBooking> jobBooking = jobBookingService.getJobBookingById(id);
 
         if(jobBooking.isPresent()){
             return new ResponseEntity<>(jobBooking.get(),HttpStatus.OK);
@@ -75,7 +78,7 @@ public class JobBookingController {
             @PathVariable UUID id,
             @RequestBody JobBooking jobBooking){
 
-        String message=jobBookingService.updateJobBooking(id,jobBooking);
+        String message = jobBookingService.updateJobBooking(id,jobBooking);
 
         if(message.equals("The job booking with that id does not exist")
                 || message.equals("The homeowner with that id does not exist")
@@ -143,6 +146,30 @@ public class JobBookingController {
         String message = jobBookingService.cancelJobBookingsByTechnicianAndDate(
             technicianId,date
         );
+
         return new ResponseEntity<>(message,HttpStatus.OK);
+    }
+
+    @GetMapping("/page")
+    public Page<JobBooking> getJobBookingsPage(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size,
+            @RequestParam(defaultValue = "bookingDate,desc") String sort){
+
+        String[] sortParts = sort.split(",");
+
+        String sortField = sortParts[0];
+        Sort.Direction direction = Sort.Direction.DESC;
+
+        if(sortParts.length > 1 && sortParts[1].equalsIgnoreCase("asc")){
+            direction = Sort.Direction.ASC;
+        }
+
+        PageRequest pageable = PageRequest.of(
+            page,
+            size,
+            Sort.by(direction,sortField)
+        );
+        return jobBookingService.getJobBookingsPage(pageable);
     }
 }

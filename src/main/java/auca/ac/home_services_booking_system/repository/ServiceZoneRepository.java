@@ -1,3 +1,4 @@
+
 package auca.ac.home_services_booking_system.repository;
 
 import java.util.List;
@@ -17,4 +18,7 @@ public interface ServiceZoneRepository extends JpaRepository<ServiceZone, UUID> 
     List<ServiceZone> findFreeServiceZones();
 
     Optional<ServiceZone> findByZoneNumber(int zoneNumber);
+    @Query("SELECT COUNT(sz) FROM ServiceZone sz WHERE NOT EXISTS " +
+           "(SELECT t FROM Technician t WHERE t.serviceZone = sz)")
+    long countFreeServiceZones();
 }

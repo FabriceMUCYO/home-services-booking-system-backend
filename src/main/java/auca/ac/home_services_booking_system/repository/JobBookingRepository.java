@@ -26,6 +26,7 @@ public interface JobBookingRepository extends JpaRepository<JobBooking, UUID> {
 
     @Query("SELECT jb.status, COUNT(jb) FROM JobBooking jb GROUP BY jb.status")
     List<Object[]> countJobBookingsByStatus();
+
     @Modifying
     @Transactional
     @Query("UPDATE JobBooking jb SET jb.status = :cancelled " +
@@ -38,4 +39,7 @@ public interface JobBookingRepository extends JpaRepository<JobBooking, UUID> {
         @Param("finished") JobStatus finished,
         @Param("cancelled") JobStatus cancelled
     );
+
+    long countByBookingDate(LocalDate bookingDate);
+    long countByStatus(JobStatus status);
 }
