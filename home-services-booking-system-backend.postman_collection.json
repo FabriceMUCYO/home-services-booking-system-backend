@@ -1,0 +1,1588 @@
+{
+  "info": {
+    "_postman_id": "0ef327dc-45fe-4459-9cc1-b2329335b1bb",
+    "name": "Home Services Booking System - Midterm",
+    "description": "Midterm API collection, 54 requests across Parts A-F and Bonus. All URLs are full localhost:8083 URLs; no placeholder UUIDs. IMPORTANT: Concrete IDs are sample database records and may not exist in another database. Test destructive requests against disposable records only. Some CRUD endpoint mappings/payloads remain unverified without backend controller code. Requests are not proof of successful execution.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "56688027"
+  },
+  "item": [
+    {
+      "name": "A - CRUD Operations",
+      "item": [
+        {
+          "name": "Get All Homeowners",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/homeowners/all",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "homeowners",
+                "all"
+              ]
+            },
+            "description": "Retrieve all records."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Homeowner By ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/homeowners/322d2a53-d71f-4b8b-b93a-cae9e5b1599e",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "homeowners",
+                "322d2a53-d71f-4b8b-b93a-cae9e5b1599e"
+              ]
+            },
+            "description": "Replace test ID as needed."
+          },
+          "response": []
+        },
+        {
+          "name": "Save Homeowner",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Test\",\n  \"phone\": \"0781234567\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8083/api/homeowners/save",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "homeowners",
+                "save"
+              ]
+            },
+            "description": "Creates a homeowner; use a unique phone."
+          },
+          "response": []
+        },
+        {
+          "name": "Update Homeowner",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Test\",\n  \"phone\": \"0781234567\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8083/api/homeowners/update/322d2a53-d71f-4b8b-b93a-cae9e5b1599e",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "homeowners",
+                "update",
+                "322d2a53-d71f-4b8b-b93a-cae9e5b1599e"
+              ]
+            },
+            "description": "Update existing homeowner."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Homeowner",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/homeowners/delete/322d2a53-d71f-4b8b-b93a-cae9e5b1599e",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "homeowners",
+                "delete",
+                "322d2a53-d71f-4b8b-b93a-cae9e5b1599e"
+              ]
+            },
+            "description": "DANGER: Current URL points to an existing homeowner. Replace with an expendable homeowner ID before running. Do not run against seeded records with bookings."
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Technicians",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/technicians/all",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "technicians",
+                "all"
+              ]
+            },
+            "description": "Retrieve all records."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Technician By ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/technicians/d9727a5d-706f-4510-9d73-c039d59b263a",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "technicians",
+                "d9727a5d-706f-4510-9d73-c039d59b263a"
+              ]
+            },
+            "description": "⚠ VERIFY against your controller/model before using. Replace test ID as needed."
+          },
+          "response": []
+        },
+        {
+          "name": "Save Technician",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Test\",\n  \"lastName\": \"Technician\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8083/api/technicians/save",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "technicians",
+                "save"
+              ]
+            },
+            "description": "⚠ VERIFY against your controller/model before using. Sample body: verify required fields before sending."
+          },
+          "response": []
+        },
+        {
+          "name": "Update Technician",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Test\",\n  \"lastName\": \"Technician\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8083/api/technicians/update/68c31315-1cc1-4d9e-9622-22932ce629d6",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "technicians",
+                "update",
+                "68c31315-1cc1-4d9e-9622-22932ce629d6"
+              ]
+            },
+            "description": "⚠ VERIFY against your controller/model before using. Replace ID with a disposable test record; verify payload fields."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Technician",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/technicians/delete/e226223f-50bc-4e44-9f1d-74d3cfba2f83",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "technicians",
+                "delete",
+                "e226223f-50bc-4e44-9f1d-74d3cfba2f83"
+              ]
+            },
+            "description": "⚠ VERIFY against your controller/model before using. Use disposable records with no dependent records."
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Trades",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/trades/all",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "trades",
+                "all"
+              ]
+            },
+            "description": "Retrieve all records."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Trade By ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/trades/faa2ddc2-2e75-45b9-8804-bab8aeab60da",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "trades",
+                "faa2ddc2-2e75-45b9-8804-bab8aeab60da"
+              ]
+            },
+            "description": "⚠ VERIFY against your controller/model before using. Replace test ID as needed."
+          },
+          "response": []
+        },
+        {
+          "name": "Save Trade",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Painting\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8083/api/trades/save",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "trades",
+                "save"
+              ]
+            },
+            "description": "⚠ VERIFY against your controller/model before using. Sample body: verify required fields before sending."
+          },
+          "response": []
+        },
+        {
+          "name": "Update Trade",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Mopping\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8083/api/trades/update/583a76ec-bc07-448d-9745-f83744a142c5",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "trades",
+                "update",
+                "583a76ec-bc07-448d-9745-f83744a142c5"
+              ]
+            },
+            "description": "⚠ VERIFY against your controller/model before using. Replace ID with a disposable test record; verify payload fields."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Trade",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/trades/delete/583a76ec-bc07-448d-9745-f83744a142c5",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "trades",
+                "delete",
+                "583a76ec-bc07-448d-9745-f83744a142c5"
+              ]
+            },
+            "description": "⚠ VERIFY against your controller/model before using. Use disposable records with no dependent records."
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Service Zones",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/service-zones/all",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "service-zones",
+                "all"
+              ]
+            },
+            "description": "Retrieve all records."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Service Zone By ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/service-zones/41d334cf-f044-4c97-b4bd-b19efd252fb2",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "service-zones",
+                "41d334cf-f044-4c97-b4bd-b19efd252fb2"
+              ]
+            },
+            "description": "⚠ VERIFY against your controller/model before using. Replace test ID as needed."
+          },
+          "response": []
+        },
+        {
+          "name": "Save Service Zone",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Rusizi\",\n  \"zoneNumber\": 5\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8083/api/service-zones/save",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "service-zones",
+                "save"
+              ]
+            },
+            "description": "⚠ VERIFY against your controller/model before using. Sample body: verify required fields before sending."
+          },
+          "response": []
+        },
+        {
+          "name": "Update Service Zone",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Kirehe\",\n  \"zoneNumber\": 5\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8083/api/service-zones/update/2cb5ba31-20b0-478d-a66c-93c173efd580",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "service-zones",
+                "update",
+                "2cb5ba31-20b0-478d-a66c-93c173efd580"
+              ]
+            },
+            "description": "⚠ VERIFY against your controller/model before using. Replace ID with a disposable test record; verify payload fields."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Service Zone",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/service-zones/delete/2cb5ba31-20b0-478d-a66c-93c173efd580",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "service-zones",
+                "delete",
+                "2cb5ba31-20b0-478d-a66c-93c173efd580"
+              ]
+            },
+            "description": "⚠ VERIFY against your controller/model before using. Use disposable records with no dependent records."
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Job Bookings",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/job-bookings/all",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "job-bookings",
+                "all"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Job Booking By ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/job-bookings/31bf2b9a-48e9-4e7b-96ad-11f6c5ea4c61",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "job-bookings",
+                "31bf2b9a-48e9-4e7b-96ad-11f6c5ea4c61"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Save Job Booking",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"bookingDate\": \"2026-12-22\",\n  \"problemDescription\": \"Repair a damaged kitchen sink\",\n  \"homeowner\": {\n    \"id\": \"322d2a53-d71f-4b8b-b93a-cae9e5b1599e\"\n  },\n  \"technician\": {\n    \"id\": \"70b0fa29-705e-44c5-8820-266bc02ddc9f\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8083/api/job-bookings/save",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "job-bookings",
+                "save"
+              ]
+            },
+            "description": "Requires an available technician and a future date."
+          },
+          "response": []
+        },
+        {
+          "name": "Update Job Booking",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"bookingDate\": \"2026-12-23\",\n  \"problemDescription\": \"Repair kitchen sink and replace fittings\",\n  \"homeowner\": {\n    \"id\": \"322d2a53-d71f-4b8b-b93a-cae9e5b1599e\"\n  },\n  \"technician\": {\n    \"id\": \"70b0fa29-705e-44c5-8820-266bc02ddc9f\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8083/api/job-bookings/update/31bf2b9a-48e9-4e7b-96ad-11f6c5ea4c61",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "job-bookings",
+                "update",
+                "31bf2b9a-48e9-4e7b-96ad-11f6c5ea4c61"
+              ]
+            },
+            "description": "DANGER: Example updates an existing booking that may have work reports; prefer a disposable booking for execution."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Job Booking",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/job-bookings/delete/31bf2b9a-48e9-4e7b-96ad-11f6c5ea4c61",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "job-bookings",
+                "delete",
+                "31bf2b9a-48e9-4e7b-96ad-11f6c5ea4c61"
+              ]
+            },
+            "description": "DANGER: This booking may have linked reports. Use a disposable booking for successful deletion. If linked reports exist, expect a conflict."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "B - Derived Queries",
+      "item": [
+        {
+          "name": "B1 - Search Homeowners By Last Name",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/homeowners/by-last-name?lastName=mucyo",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "homeowners",
+                "by-last-name"
+              ],
+              "query": [
+                {
+                  "key": "lastName",
+                  "value": "mucyo"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "B2 - Job Bookings By Status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/job-bookings/by-status?status=REQUESTED",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "job-bookings",
+                "by-status"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "REQUESTED"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "B3 - Job Bookings Between Dates",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/job-bookings/between?start=2026-10-01&end=2026-12-31",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "job-bookings",
+                "between"
+              ],
+              "query": [
+                {
+                  "key": "start",
+                  "value": "2026-10-01"
+                },
+                {
+                  "key": "end",
+                  "value": "2026-12-31"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "C - JPQL Queries",
+      "item": [
+        {
+          "name": "C1 - Technicians By Trade",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/technicians/by-trade?name=plumbing",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "technicians",
+                "by-trade"
+              ],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "plumbing"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "C2 - Free Service Zones",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/service-zones/free",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "service-zones",
+                "free"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "C3 - Unused Trades",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/trades/unused",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "trades",
+                "unused"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "C4 - Homeowners Of Technician",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/homeowners/of-technician/d9727a5d-706f-4510-9d73-c039d59b263a",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "homeowners",
+                "of-technician",
+                "d9727a5d-706f-4510-9d73-c039d59b263a"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "D - Business Rules",
+      "item": [
+        {
+          "name": "D1 - Save Valid Booking",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"bookingDate\": \"2026-12-20\",\n  \"problemDescription\": \"Repair leaking kitchen pipe\",\n  \"homeowner\": {\n    \"id\": \"322d2a53-d71f-4b8b-b93a-cae9e5b1599e\"\n  },\n  \"technician\": {\n    \"id\": \"70b0fa29-705e-44c5-8820-266bc02ddc9f\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8083/api/job-bookings/save",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "job-bookings",
+                "save"
+              ]
+            },
+            "description": "Expected 201 if date available. A repeated identical request may return 409."
+          },
+          "response": []
+        },
+        {
+          "name": "D1 - Reject Past Date",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"bookingDate\": \"2025-01-01\",\n  \"problemDescription\": \"Repair leaking pipe\",\n  \"homeowner\": {\n    \"id\": \"322d2a53-d71f-4b8b-b93a-cae9e5b1599e\"\n  },\n  \"technician\": {\n    \"id\": \"70b0fa29-705e-44c5-8820-266bc02ddc9f\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8083/api/job-bookings/save",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "job-bookings",
+                "save"
+              ]
+            },
+            "description": "Expected 400."
+          },
+          "response": []
+        },
+        {
+          "name": "D1 - Reject Double Booking",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"bookingDate\": \"2026-12-20\",\n  \"problemDescription\": \"Another booking same technician/date\",\n  \"homeowner\": {\n    \"id\": \"322d2a53-d71f-4b8b-b93a-cae9e5b1599e\"\n  },\n  \"technician\": {\n    \"id\": \"70b0fa29-705e-44c5-8820-266bc02ddc9f\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8083/api/job-bookings/save",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "job-bookings",
+                "save"
+              ]
+            },
+            "description": "Expected 409 only after a non-cancelled booking exists for this technician/date."
+          },
+          "response": []
+        },
+        {
+          "name": "D1 - Reject Missing Homeowner",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"bookingDate\": \"2026-12-24\",\n  \"problemDescription\": \"Test missing homeowner\",\n  \"homeowner\": {\n    \"id\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"technician\": {\n    \"id\": \"70b0fa29-705e-44c5-8820-266bc02ddc9f\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8083/api/job-bookings/save",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "job-bookings",
+                "save"
+              ]
+            },
+            "description": "Expected 404."
+          },
+          "response": []
+        },
+        {
+          "name": "D2 - Assign Booking",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/job-bookings/cc4835e5-43c7-43ee-945a-b335990f69a2/status?status=ASSIGNED",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "job-bookings",
+                "cc4835e5-43c7-43ee-945a-b335990f69a2",
+                "status"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "ASSIGNED"
+                }
+              ]
+            },
+            "description": "Status change depends on current booking state; confirm it before sending."
+          },
+          "response": []
+        },
+        {
+          "name": "D2 - Finish Booking",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/job-bookings/6f4dd4a3-0525-4332-87aa-55c476e16d99/status?status=FINISHED",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "job-bookings",
+                "6f4dd4a3-0525-4332-87aa-55c476e16d99",
+                "status"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "FINISHED"
+                }
+              ]
+            },
+            "description": "Status change depends on current booking state; confirm it before sending."
+          },
+          "response": []
+        },
+        {
+          "name": "D2 - Reject Invalid Status Transition",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/job-bookings/31bf2b9a-48e9-4e7b-96ad-11f6c5ea4c61/status?status=REQUESTED",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "job-bookings",
+                "31bf2b9a-48e9-4e7b-96ad-11f6c5ea4c61",
+                "status"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "REQUESTED"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "D3 - Add Trade To Technician",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/technicians/d9727a5d-706f-4510-9d73-c039d59b263a/trades/583a76ec-bc07-448d-9745-f83744a142c5",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "technicians",
+                "d9727a5d-706f-4510-9d73-c039d59b263a",
+                "trades",
+                "583a76ec-bc07-448d-9745-f83744a142c5"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "D3 - Reject Duplicate Trade",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/technicians/d9727a5d-706f-4510-9d73-c039d59b263a/trades/faa2ddc2-2e75-45b9-8804-bab8aeab60da",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "technicians",
+                "d9727a5d-706f-4510-9d73-c039d59b263a",
+                "trades",
+                "faa2ddc2-2e75-45b9-8804-bab8aeab60da"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "D4 - Assign Service Zone",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/technicians/d9727a5d-706f-4510-9d73-c039d59b263a/service-zone?zoneNumber=4",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "technicians",
+                "d9727a5d-706f-4510-9d73-c039d59b263a",
+                "service-zone"
+              ],
+              "query": [
+                {
+                  "key": "zoneNumber",
+                  "value": "4"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "D4 - Reject Occupied Zone",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/technicians/d9727a5d-706f-4510-9d73-c039d59b263a/service-zone?zoneNumber=2",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "technicians",
+                "d9727a5d-706f-4510-9d73-c039d59b263a",
+                "service-zone"
+              ],
+              "query": [
+                {
+                  "key": "zoneNumber",
+                  "value": "2"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "E - Work Reports",
+      "item": [
+        {
+          "name": "E1 - Create Work Report",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"taskName\": \"Pipe repair\",\n  \"description\": \"Fixed leaking kitchen pipe\",\n  \"hoursWorked\": 2\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8083/api/work-reports/save?jobBookingId=31bf2b9a-48e9-4e7b-96ad-11f6c5ea4c61",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "work-reports",
+                "save"
+              ],
+              "query": [
+                {
+                  "key": "jobBookingId",
+                  "value": "31bf2b9a-48e9-4e7b-96ad-11f6c5ea4c61"
+                }
+              ]
+            },
+            "description": "Booking must be FINISHED; reportDate set by server."
+          },
+          "response": []
+        },
+        {
+          "name": "E1 - Reject Report For Unfinished Booking",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"taskName\": \"Premature report\",\n  \"description\": \"Should not be allowed\",\n  \"hoursWorked\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8083/api/work-reports/save?jobBookingId=6d8ba02f-ed26-4968-8b2b-3a35da98b965",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "work-reports",
+                "save"
+              ],
+              "query": [
+                {
+                  "key": "jobBookingId",
+                  "value": "6d8ba02f-ed26-4968-8b2b-3a35da98b965"
+                }
+              ]
+            },
+            "description": "Expected error; booking must be FINISHED."
+          },
+          "response": []
+        },
+        {
+          "name": "E2 - Reports By Homeowner Phone",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/work-reports/homeowner/0791762929",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "work-reports",
+                "homeowner",
+                "0791762929"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "E3 - Delete Work Report",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/work-reports/delete/7cbbc9f6-8703-4c81-b835-930aae1e781c",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "work-reports",
+                "delete",
+                "7cbbc9f6-8703-4c81-b835-930aae1e781c"
+              ]
+            },
+            "description": "DANGER: Deletes the concrete work-report UUID shown in URL if it exists. Use only a disposable report. After deletion, this ID will no longer exist."
+          },
+          "response": []
+        },
+        {
+          "name": "E4 - Block Deleting Booking With Reports",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/job-bookings/delete/31bf2b9a-48e9-4e7b-96ad-11f6c5ea4c61",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "job-bookings",
+                "delete",
+                "31bf2b9a-48e9-4e7b-96ad-11f6c5ea4c61"
+              ]
+            },
+            "description": "Expected 409 ONLY if booking still has work reports. Otherwise request may delete the booking. Verify linked reports first."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "F - Statistics and Bulk Update",
+      "item": [
+        {
+          "name": "F1 - Booking Counts By Status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/job-bookings/stats/by-status",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "job-bookings",
+                "stats",
+                "by-status"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "F2 - Cancel Technician Bookings For Day",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/job-bookings/cancel-day?technicianId=d9727a5d-706f-4510-9d73-c039d59b263a&date=2026-10-20",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "job-bookings",
+                "cancel-day"
+              ],
+              "query": [
+                {
+                  "key": "technicianId",
+                  "value": "d9727a5d-706f-4510-9d73-c039d59b263a"
+                },
+                {
+                  "key": "date",
+                  "value": "2026-10-20"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Bonus - Dashboard and Pagination",
+      "item": [
+        {
+          "name": "Bonus 1 - Dashboard Summary",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/dashboard/summary",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "dashboard",
+                "summary"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Bonus 2 - First Page Newest First",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/job-bookings/page?page=0&size=5&sort=bookingDate,desc",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "job-bookings",
+                "page"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "5"
+                },
+                {
+                  "key": "sort",
+                  "value": "bookingDate,desc"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Bonus 2 - Second Page",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/job-bookings/page?page=1&size=5&sort=bookingDate,desc",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "job-bookings",
+                "page"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "size",
+                  "value": "5"
+                },
+                {
+                  "key": "sort",
+                  "value": "bookingDate,desc"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Bonus 2 - First Page Oldest First",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/job-bookings/page?page=0&size=5&sort=bookingDate,asc",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "job-bookings",
+                "page"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "5"
+                },
+                {
+                  "key": "sort",
+                  "value": "bookingDate,asc"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
