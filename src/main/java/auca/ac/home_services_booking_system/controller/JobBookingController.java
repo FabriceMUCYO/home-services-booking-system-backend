@@ -33,7 +33,7 @@ public class JobBookingController {
 
     @PostMapping("/save")
     public ResponseEntity<String> saveJobBooking(@RequestBody JobBooking jobBooking){
-        String message=jobBookingService.saveJobBooking(jobBooking);
+        String message = jobBookingService.saveJobBooking(jobBooking);
 
         if(message.equals("Job booking date cannot be in the past")){
             return new ResponseEntity<>(message,HttpStatus.BAD_REQUEST);
@@ -87,7 +87,7 @@ public class JobBookingController {
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteJobBooking(@PathVariable UUID id){
-        String message=jobBookingService.deleteJobBooking(id);
+        String message = jobBookingService.deleteJobBooking(id);
 
         if(message.equals("The job booking with that id does not exist")){
             return new ResponseEntity<>(message,HttpStatus.NOT_FOUND);
@@ -107,15 +107,17 @@ public class JobBookingController {
 
     @GetMapping("/between")
     public List<JobBooking> getJobBookingsBetweenDates(
-            @RequestParam LocalDate start,@RequestParam LocalDate end){
+            @RequestParam LocalDate start,
+            @RequestParam LocalDate end){
         return jobBookingService.getJobBookingsBetweenDates(start,end);
     }
 
     @PatchMapping("/{id}/status")
     public ResponseEntity<String> changeJobBookingStatus(
-            @PathVariable UUID id,@RequestParam JobStatus status){
+            @PathVariable UUID id,
+            @RequestParam JobStatus status){
 
-        String message=jobBookingService.changeJobBookingStatus(id,status);
+        String message = jobBookingService.changeJobBookingStatus(id,status);
 
         if(message.equals("The job booking with that id does not exist")){
             return new ResponseEntity<>(message,HttpStatus.NOT_FOUND);
@@ -126,5 +128,21 @@ public class JobBookingController {
         else{
             return new ResponseEntity<>(message,HttpStatus.OK);
         }
+    }
+
+    @GetMapping("/stats/by-status")
+    public List<Object[]> countJobBookingsByStatus(){
+        return jobBookingService.countJobBookingsByStatus();
+    }
+
+    @PatchMapping("/cancel-day")
+    public ResponseEntity<String> cancelJobBookingsByTechnicianAndDate(
+            @RequestParam UUID technicianId,
+            @RequestParam LocalDate date){
+
+        String message = jobBookingService.cancelJobBookingsByTechnicianAndDate(
+            technicianId,date
+        );
+        return new ResponseEntity<>(message,HttpStatus.OK);
     }
 }

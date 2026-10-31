@@ -88,20 +88,20 @@ public class JobBookingService {
     public String updateJobBooking(UUID id,JobBooking jobBooking){
         Optional<JobBooking> existingBooking = jobBookingRepository.findById(id);
 
-        if(existingBooking.isEmpty()) {
+        if(existingBooking.isEmpty()){
             return "The job booking with that id does not exist";
         }
-        if(jobBooking.getHomeowner() ==null || jobBooking.getHomeowner().getId() == null){
+        if(jobBooking.getHomeowner() == null || jobBooking.getHomeowner().getId() == null){
             return "The homeowner with that id does not exist";
         }
 
         Optional<Homeowner> homeowner = homeownerRepository.findById(
             jobBooking.getHomeowner().getId()
         );
-        if(homeowner.isEmpty()) {
+        if(homeowner.isEmpty()){
             return "The homeowner with that id does not exist";
         }
-        if(jobBooking.getTechnician() ==null || jobBooking.getTechnician().getId() == null){
+        if(jobBooking.getTechnician() == null || jobBooking.getTechnician().getId() == null){
             return "The technician with that id does not exist";
         }
 
@@ -171,5 +171,15 @@ public class JobBookingService {
 
         jobBookingRepository.save(jobBooking);
         return "Job booking status updated successfully";
+    }
+
+    public List<Object[]> countJobBookingsByStatus(){
+        return jobBookingRepository.countJobBookingsByStatus();
+    }
+    public String cancelJobBookingsByTechnicianAndDate(UUID technicianId,LocalDate date){
+        int count = jobBookingRepository.cancelJobBookingsByTechnicianAndDate(
+            technicianId,date,JobStatus.FINISHED,JobStatus.CANCELLED
+        );
+        return count + " job bookings cancelled";
     }
 }
